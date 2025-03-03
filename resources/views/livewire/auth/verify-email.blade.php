@@ -6,7 +6,8 @@ use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
 
-new #[Layout('components.layouts.auth')] class extends Component {
+new #[Layout('components.layouts.auth')] class extends Component
+{
     /**
      * Send an email verification notification to the user.
      */
@@ -39,8 +40,8 @@ new #[Layout('components.layouts.auth')] class extends Component {
         {{ __('Please verify your email address by clicking on the link we just emailed to you.') }}
     </div>
 
-    @if (session('status') == 'verification-link-sent')
-        <div class="font-medium text-center text-sm text-green-600">
+    @if (session('status') === 'verification-link-sent')
+        <div class="text-center text-sm font-medium text-green-600">
             {{ __('A new verification link has been sent to the email address you provided during registration.') }}
         </div>
     @endif
@@ -53,7 +54,7 @@ new #[Layout('components.layouts.auth')] class extends Component {
         <button
             wire:click="logout"
             type="submit"
-            class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-hidden focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-hidden"
         >
             {{ __('Log out') }}
         </button>

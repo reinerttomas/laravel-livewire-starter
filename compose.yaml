@@ -1,0 +1,27 @@
+services:
+
+  database:
+    image: postgres:17-alpine
+    restart: always
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=${DB_DATABASE}
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: [ "CMD", "pg_isready" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  adminer:
+    image: dockette/adminer:dg
+    restart: always
+    ports:
+      - "8000:80"
+
+volumes:
+  db-data:

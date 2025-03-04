@@ -25,6 +25,17 @@ jobs:
           php-version: 8.4
           tools: composer:v2
 
+      - name: Cache Composer Dependencies
+        uses: actions/cache@v3
+        with:
+          path: vendor
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Add Flux Credentials Loaded From ENV
+        run: composer config http-basic.composer.fluxui.dev "${{ secrets.FLUX_USERNAME }}" "${{ secrets.FLUX_LICENSE_KEY }}"
+
       - name: Install Dependencies
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
 
